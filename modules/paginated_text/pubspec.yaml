@@ -1,0 +1,27 @@
+name: paginated_text
+description: "Takes a block of text, auto-paginates it based on the layout size, and optionally: adds an auto-sized drop cap on the first page and/or parses inline markdown."
+version: 0.4.5
+repository: https://github.com/dra11y/paginated_text.git
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+  flutter: ">=3.0.0"
+
+dependencies:
+  collection: '^1.17.2'
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter: {}
+
+screenshots:
+  - description: Animated GIF screen demo of paginated_text
+    path: paginated_text_demo.gif
+
+topics:
+  - text
