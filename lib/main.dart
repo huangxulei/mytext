@@ -108,8 +108,9 @@ class _PaginatedExampleState extends State<PaginatedExample>
           return Padding(
             padding: const EdgeInsets.all(16),
             child: PaginatedText(
-              _controller,
+              _controller, //上面进入
               builder: (context, child) {
+                //child 之前定义
                 return DefaultTextStyle(
                   style: widget.style,
                   child: Column(

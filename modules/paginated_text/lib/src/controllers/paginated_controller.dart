@@ -94,11 +94,16 @@ class PaginatedController with ChangeNotifier {
   /// Tells the controller to update its `layoutSize`. Causes repagination if needed.
   /// 告诉控制器更新其“layoutSize”。如果需要，会导致重新分页。
   void updateLayoutSize(Size layoutSize) {
+    //第一次获取dx 肯定是true
     final dx =
         (layoutSize.width - _layoutSize.width).abs() > _data.resizeTolerance;
+    print("dx:${dx} === _data.resizeTolerance:${_data.resizeTolerance}");
+
     final dy = dx ||
         (layoutSize.height - _layoutSize.height).abs() > _data.resizeTolerance;
+
     if (dx || dy) {
+      print("dx:${dx} === dy:${dy}");
       update(_data, layoutSize);
     }
   }
@@ -134,6 +139,7 @@ class PaginatedController with ChangeNotifier {
   }
 
   /// Update this controller instance with given `data` and `layoutSize`.
+
   void update(PaginateData data, Size layoutSize) {
     if (data == _data && layoutSize == _layoutSize) {
       return;
@@ -274,6 +280,7 @@ class PaginatedController with ChangeNotifier {
     return null;
   }
 
+  //分页**
   void _paginate(PaginateData data, Size layoutSize) {
     _data = data;
     _layoutSize = layoutSize;
@@ -287,9 +294,11 @@ class PaginatedController with ChangeNotifier {
     }
 
     // Calculate line height and max lines per page
+    // 计算行高,字体高度
     final lineHeight = data.textScaler.scale(data.style.fontSize ?? 14.0) *
         (data.style.height ?? 1.0);
     _lineHeight = lineHeight;
+    //每页最大行数
     final maxLinesPerPage =
         max(data.dropCapLines, (layoutSize.height / lineHeight).floor());
     _maxLinesPerPage = maxLinesPerPage;
@@ -306,11 +315,11 @@ class PaginatedController with ChangeNotifier {
       if (textPosition == 0 && data.dropCapLines > 0) {
         capChars = data.text.substring(0, 1);
         textPosition += capChars.length;
-
+        //大写字母
         final wantedCapFontSize = getCapFontSize(
           textFontSize: data.style.fontSize ?? 14,
           lineHeight: data.style.height ?? 1.0,
-          capLines: data.dropCapLines,
+          capLines: data.dropCapLines, //大写字母占几行
           textLetterHeightRatio: defaultLetterHeightRatio,
           capLetterHeightRatio: defaultLetterHeightRatio,
         );

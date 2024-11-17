@@ -33,7 +33,7 @@ class PaginatedText extends StatelessWidget {
       builder: (context, _) {
         final child = LayoutBuilder(builder: (context, constraints) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
-            controller.updateLayoutSize(constraints.biggest);
+            controller.updateLayoutSize(constraints.biggest); //执行这里
           });
 
           return DropCapText(
