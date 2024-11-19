@@ -3,6 +3,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:paginated_text/src/extensions/line_metrics_extension.dart';
 
+//适配文字, 文字 行内容
 class FittedText {
   final double height;
   final List<String> lines;
@@ -27,10 +28,13 @@ class FittedText {
     assert(maxLines > 0, 'maxLines = $maxLines; must be > 0');
 
     // Skip first empty line(s)
+    // 过滤空行
+    // 分割成段落
     final textLines =
         text.split('\n').skipWhile((line) => line.trim().isEmpty).toList();
 
     // TODO: Test this! Remove final blank lines
+    // 去除段落前后空格
     for (int i = textLines.length - 1; i > 0; i--) {
       if (textLines[i].trim().isNotEmpty) {
         break;
@@ -46,7 +50,7 @@ class FittedText {
     );
 
     final strutStyle = StrutStyle.fromTextStyle(style);
-
+//塞进去适配
     final textPainter = TextPainter(
       text: textSpan,
       textScaler: textScaler,

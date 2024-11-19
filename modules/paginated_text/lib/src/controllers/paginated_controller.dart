@@ -148,13 +148,16 @@ class PaginatedController with ChangeNotifier {
     _paginate(data, layoutSize);
   }
 
+  //获取下一行数内容
   NextLinesData _getNextLines({
     required bool autoPageBreak,
     required int textPosition,
     required double width,
     required int maxLines,
   }) {
+    //从当前焦点 获取文字内容
     final String currentText = _data.text.substring(textPosition);
+
     final fittedText = FittedText.fit(
       text: currentText,
       width: width,
@@ -163,6 +166,8 @@ class PaginatedController with ChangeNotifier {
       textDirection: _data.textDirection,
       maxLines: maxLines,
     );
+
+    print("fittedText${fittedText}");
 
     // Handle hard page break, if one exists.
     final hardPageBreakResult = _handleHardPageBreak(fittedText, textPosition);
@@ -315,7 +320,7 @@ class PaginatedController with ChangeNotifier {
       if (textPosition == 0 && data.dropCapLines > 0) {
         capChars = data.text.substring(0, 1);
         textPosition += capChars.length;
-        //大写字母
+        //计算首字母的大小 会放大
         final wantedCapFontSize = getCapFontSize(
           textFontSize: data.style.fontSize ?? 14,
           lineHeight: data.style.height ?? 1.0,
@@ -334,7 +339,7 @@ class PaginatedController with ChangeNotifier {
           text: capSpan,
           textScaler: data.textScaler,
           textDirection: data.textDirection,
-        )..layout();
+        )..layout(); //渲染首字母
         final nextLinesData = _getNextLines(
           autoPageBreak: false,
           textPosition: textPosition,
@@ -361,8 +366,9 @@ class PaginatedController with ChangeNotifier {
       }
 
       List<String> nextLines = [];
-
+      //剩下页面的行数 首页 7行 后面10行 每页10行
       final remainingLinesOnPage = maxLinesPerPage - dropCapLines.length;
+      debugPrint("remainingLinesOnPage: ${remainingLinesOnPage}");
       final nextLinesData = _getNextLines(
         autoPageBreak: true,
         textPosition: textPosition,

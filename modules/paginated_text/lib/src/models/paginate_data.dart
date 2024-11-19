@@ -44,7 +44,7 @@ class PaginateData {
   /// The `TextStyle` of the body text. This is required to paginate the
   /// text without a `BuildContext`.
   /// 正文的“TextStyle”。这是分页所必需的
-  ///没有“BuildContext”的文本。
+  /// 没有“BuildContext”的文本。
   final TextStyle style;
 
   /// Number of lines high the drop cap should be. If 0, the text will
@@ -79,9 +79,9 @@ class PaginateData {
   /// Considers only this many lines from the last visible for `pageBreak`.
   /// Defaults to 1 (the last line only).
   /// If `pageBreak` is not encountered on these lines, falls back to `PageBreak.word`.
-  ///只考虑从“pageBreak”的最后一行开始的这么多行。
-  ///默认为1（仅最后一行）。
-  ///如果这些行上没有遇到“pageBreak”，则返回到“pageBreak.word”。
+  /// 只考虑从“pageBreak”的最后一行开始的这么多行。
+  /// 默认为1（仅最后一行）。
+  /// 如果这些行上没有遇到“pageBreak”，则返回到“pageBreak.word”。
   final int breakLines;
 
   /// Pass in the text direction to be used. Defaults to `TextDirection.ltr`.
