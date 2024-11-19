@@ -50,6 +50,7 @@ class PaginatedController with ChangeNotifier {
   bool get isFirst => pageIndex == 0;
 
   /// Whether the current page is the last page.
+  /// 是否最后一页
   bool get isLast => pageIndex == pages.length - 1;
 
   /// The current page model.

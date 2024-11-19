@@ -20,7 +20,6 @@ class PaginatedText extends StatelessWidget {
   ValueKey get key => ValueKey(controller.currentPage);
 
   /// Called at layout time to construct the widget tree.
-  ///
   /// The builder must not return null.
   final PaginatedTextBuilderFunction? builder;
 

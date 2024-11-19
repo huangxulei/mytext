@@ -66,7 +66,7 @@ class CapFontData {
       '$runtimeType(fontFamily: $fontFamily, fontWeight: $fontWeight, fontStyle: $fontStyle)';
 }
 
-const bool debug = false;
+const bool debug = true;
 
 // Cache letter height to font size ratios for each font family.
 final letterHeightRatioCache = HashMap<CapFontData, double>();
@@ -349,7 +349,9 @@ class _DropCapTextState extends State<DropCapText> {
                   Container(
                     decoration: debug
                         ? BoxDecoration(
-                            border: Border.all(width: 2, color: Colors.pink))
+                            border: Border.all(
+                                width: 2,
+                                color: const Color.fromARGB(255, 5, 242, 29)))
                         : null,
                     child: Row(
                       // textDirection: widget.dropCapPosition == null ||
@@ -379,7 +381,7 @@ class _DropCapTextState extends State<DropCapText> {
                                     ? BoxDecoration(
                                         border: Border.all(
                                           color: Colors.yellowAccent,
-                                          width: 2,
+                                          width: 5,
                                         ),
                                       )
                                     : null,
@@ -394,8 +396,8 @@ class _DropCapTextState extends State<DropCapText> {
                           decoration: debug
                               ? BoxDecoration(
                                   border: Border.all(
-                                    color: Colors.green,
-                                    width: 2,
+                                    color: const Color.fromARGB(255, 1, 9, 242),
+                                    width: 5,
                                   ),
                                 )
                               : null,
@@ -410,7 +412,7 @@ class _DropCapTextState extends State<DropCapText> {
                         ? BoxDecoration(
                             border: Border.all(
                               color: Colors.purple,
-                              width: 2,
+                              width: 6,
                             ),
                           )
                         : null,
@@ -423,14 +425,17 @@ class _DropCapTextState extends State<DropCapText> {
         );
 
         final registrar = SelectionContainer.maybeOf(context);
+        print("${registrar}");
 
-        return registrar != null
-            ? SelectionContainer(
-                delegate: ChildOrderedSelectionDelegate(),
-                registrar: registrar,
-                child: child,
-              )
-            : child;
+        // return registrar != null
+        //     ? SelectionContainer(
+        //         delegate: ChildOrderedSelectionDelegate(),
+        //         registrar: registrar,
+        //         child: child,
+        //       )
+        //     : child;
+
+        return child;
       }),
     );
   }

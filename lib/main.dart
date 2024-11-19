@@ -94,7 +94,7 @@ class _PaginatedExampleState extends State<PaginatedExample>
           if (snapshot.connectionState != ConnectionState.done) {
             return const CircularProgressIndicator.adaptive();
           }
-
+          //作用是控制动画方向是否反转
           final reverse = _controller.pageIndex < _controller.previousPageIndex;
 
           return Padding(
