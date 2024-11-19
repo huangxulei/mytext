@@ -61,9 +61,10 @@ class FittedText {
         minWidth: width,
         maxWidth: width,
       );
-
+    //可以获取每行内容所占据的宽高
     List<LineMetrics> lineMetrics = textPainter.computeLineMetrics();
     if (textPainter.didExceedMaxLines) {
+      //判断是否超行,如果超过就截取
       lineMetrics = lineMetrics.sublist(0, maxLines);
     }
 
@@ -75,6 +76,10 @@ class FittedText {
       /// but calls Paragraph.getLineBoundary: The newline (if any) is returned as part of the range.
       /// Which is it?
       /// Through experimentation, the first is true.
+      ///from getLineBoundary：下一行（如果有的话）不会作为范围的一部分返回。
+      ///但调用Paragraph.getLineBoundary：下一行（如果有的话）作为范围的一部分返回。
+      ///它是什么？
+      ///通过实验，第一个是正确的。
       final end = line.hardBreak ? boundary.end + 1 : boundary.end;
       final lineText =
           trimmedText.substring(boundary.start, min(end, trimmedText.length));
