@@ -378,7 +378,7 @@ class PaginatedController with ChangeNotifier {
 
       nextLines = nextLinesData.lines;
       textPosition = nextLinesData.nextPosition;
-
+// 塞入 textPainer中, 然后根据函数 活的textposition位置
       final text = capChars + dropCapLines.join() + nextLines.join();
       final lines = dropCapLines.length + nextLines.length;
 
