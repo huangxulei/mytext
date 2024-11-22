@@ -98,13 +98,11 @@ class PaginatedController with ChangeNotifier {
     //第一次获取dx 肯定是true
     final dx =
         (layoutSize.width - _layoutSize.width).abs() > _data.resizeTolerance;
-    print("dx:${dx} === _data.resizeTolerance:${_data.resizeTolerance}");
 
     final dy = dx ||
         (layoutSize.height - _layoutSize.height).abs() > _data.resizeTolerance;
 
     if (dx || dy) {
-      print("dx:${dx} === dy:${dy}");
       update(_data, layoutSize);
     }
   }
@@ -167,8 +165,6 @@ class PaginatedController with ChangeNotifier {
       textDirection: _data.textDirection,
       maxLines: maxLines,
     );
-
-    print("fittedText${fittedText}");
 
     // Handle hard page break, if one exists.
     final hardPageBreakResult = _handleHardPageBreak(fittedText, textPosition);
@@ -369,7 +365,7 @@ class PaginatedController with ChangeNotifier {
       List<String> nextLines = [];
       //剩下页面的行数 首页 7行 后面10行 每页10行
       final remainingLinesOnPage = maxLinesPerPage - dropCapLines.length;
-      debugPrint("remainingLinesOnPage: ${remainingLinesOnPage}");
+
       final nextLinesData = _getNextLines(
         autoPageBreak: true,
         textPosition: textPosition,

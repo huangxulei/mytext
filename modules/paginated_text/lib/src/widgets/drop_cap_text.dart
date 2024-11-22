@@ -66,7 +66,7 @@ class CapFontData {
       '$runtimeType(fontFamily: $fontFamily, fontWeight: $fontWeight, fontStyle: $fontStyle)';
 }
 
-const bool debug = true;
+const bool debug = false;
 
 // Cache letter height to font size ratios for each font family.
 final letterHeightRatioCache = HashMap<CapFontData, double>();
@@ -143,6 +143,10 @@ class _DropCapTextState extends State<DropCapText> {
 
     MarkdownParser? mdData =
         widget.parseInlineMarkdown ? MarkdownParser(widget.data) : null;
+    for (int i = 0; i < mdData!.spans.length; i++) {
+      var m = mdData.spans[i];
+      print("i:${i}; m.text:${m.text}");
+    }
 
     final String dropCapStr =
         (mdData?.plainText ?? widget.data).substring(0, dropCapChars);
@@ -245,7 +249,7 @@ class _DropCapTextState extends State<DropCapText> {
 
         int capLinesEndIndex = 0;
         double textBaseline = capBaseline;
-
+        //首字
         if (hasDropCapLines) {
           textPainter
             ..maxLines = capLines
@@ -260,7 +264,7 @@ class _DropCapTextState extends State<DropCapText> {
                   .getPositionForOffset(Offset(line.width, line.baseline))
                   .offset;
 
-              debugPrint('line $index: ${remainingText.substring(start, end)}');
+              print('line $index: ${remainingText.substring(start, end)}');
             }
           }
           didExceedCapLines = textLines.length >= capLines;
@@ -315,7 +319,7 @@ class _DropCapTextState extends State<DropCapText> {
           textAlign: widget.textAlign,
           textScaler: widget.textScaler,
         );
-
+        // print("capLinesEndIndex :${capLinesEndIndex}");
         // Remaining Text
         final remainingTextWidget = Text.rich(
           TextSpan(
@@ -425,7 +429,6 @@ class _DropCapTextState extends State<DropCapText> {
         );
 
         final registrar = SelectionContainer.maybeOf(context);
-        print("${registrar}");
 
         // return registrar != null
         //     ? SelectionContainer(
@@ -561,7 +564,7 @@ class MarkdownParser {
     const String markupBold = '**';
     const String markupItalic = '_';
     const String markupUnderline = '++';
-
+    // spans 插入
     addSpan(String markup, bool isOpening) {
       final List<Markup> markups = [Markup(markup, isOpening)];
 
@@ -592,8 +595,10 @@ class MarkdownParser {
       return data.substring(i, min(i + markup.length, data.length)) == markup;
     }
 
+//循环字符串
     for (int c = 0; c < data.length; c++) {
       if (checkMarkup(c, markupBold)) {
+        //碰到**
         bold = !bold;
         addSpan(markupBold, bold);
         c += markupBold.length - 1;
@@ -627,6 +632,7 @@ class MarkdownSpan {
   });
 }
 
+//String 字符
 class Markup {
   final String code;
   final bool isActive;
